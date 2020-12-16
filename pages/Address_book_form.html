@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" href="../assets/icons/addressbook_icon.png">
     <link rel="stylesheet" href="../css/form_style.css">
-    <title>Address Book App</title>
+    <title>Address Book Form</title>
 </head>
 
 <body>
@@ -20,7 +21,7 @@
         </div>
     </header>
     <div class="form-content">
-        <form class="form" action="#" onsubmit="save();return false">
+        <form class="form" action="#" onsubmit="save(event)" onreset="resetForm()">
             <div class="form-head">
                 <div class="form-text">Person Address Form</div>
                 <div>
@@ -29,50 +30,59 @@
             </div>
             <div class="row-content">
                 <label for="full-name" class="label text">Full Name</label>
-                <input class="input" type="text" id="full-name" name="full-name" required>
-                <valid-message class="valid-name" for="full-name"></valid-message>
-                <error-output class="full-name-error" for="full-name"></error-output>
+                <div class="validity-check">
+                    <input class="input" type="text" id="full-name" name="full-name" required>
+                    <valid-message class="valid-full-name" for="full-name"></valid-message>
+                    <error-output class="full-name-error" for="full-name"></error-output>
+                </div>
             </div>
             <div class="row-content">
                 <label for="address" class="label text">Address</label>
-                <textarea class="input text" name="address" id="address" style="height: 100px;"></textarea>
+                <div class="validity-check">
+                    <textarea class="input text" name="address" id="address" style="height: 100px;"></textarea>
+                    <valid-message class="valid-address" for="address"></valid-message>
+                    <error-output class="address-error" for="address"></error-output>
+                </div>
             </div>
             <div class="select-elements">
-                <div name="city" id="city" class="select">
+                <div name="select-city" id="select-city" class="select-div">
                     <label for="city" class="label text">City</label>
                     <select name="city" id="city">
                         <option value="" disabled selected hidden>Select City</option>
-                        <option value="city1">Delhi</option>
-                        <option value="city2">Mumbai</option>
-                        <option value="city3">Chennai</option>
-                        <option value="city4">Dispur</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Jaipur">Jaipur</option>
+                        <option value="Lucknow">Lucknow</option>
                     </select>
                 </div>
-                <div name="state" id="state" class="select">
+                <div name="select-state" id="select-state" class="select-div">
                     <label for="state" class="label text">State</label>
                     <select name="state" id="state">
                         <option value="" disabled selected hidden>Select State</option>
-                        <option value="state1">Delhi</option>
-                        <option value="state2">Maharashtra</option>
-                        <option value="state3">Tamil Nadu</option>
-                        <option value="state4">Assam</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
                     </select>
                 </div>
-                <div name="zip" id="zip" class="select">
+                <div name="select-zip" id="select-zip" class="select-div">
                     <label for="zip" class="label text">Zip Code</label>
                     <select name="zip" id="zip">
                         <option value="" disabled selected hidden>Select Zip Code</option>
-                        <option value="zip1">123021</option>
-                        <option value="zip2">100101</option>
-                        <option value="zip3">125212</option>
-                        <option value="zip4">834016</option>
+                        <option value="123021">123021</option>
+                        <option value="100101">100101</option>
+                        <option value="125212">125212</option>
+                        <option value="834016">834016</option>
                     </select>
                 </div>
             </div>
             <div class="row-content">
                 <label for="tel" class="label text">Phone Number</label>
-                <input type="tel" id="tel" name="tel" class="input">
-                <error-output class="tel-error" for="tel"></error-output>
+                <div class="validity-check">
+                    <input class="input" type="tel" id="tel" name="tel">
+                    <valid-message class="valid-tel" for="tel"></valid-message>
+                    <error-output class="tel-error" for="tel"></error-output>
+                </div>
             </div>
             <div class="buttonParent">
                 <div class="submit-reset">
@@ -81,8 +91,6 @@
                 </div>
             </div>
         </form>
-    </div>
-    </form>
     </div>
     <script src="../js/person_data_script.js"></script>
     <script src="../js/form_script.js"></script>

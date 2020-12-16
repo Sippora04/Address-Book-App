@@ -1,40 +1,71 @@
-// const getInputValueById=(id)=>{
-// let value=document.querySelector(id).value;
-// return value;
-// }
-
-// const getSelectedValues=(propertyValue)=>{
-// let allItems=document.querySelectorAll(propertyValue);
-// let selItems=[];
-// allItems.forEach(item=>{
-// if(item.checked) 
-// selItems.push(item.value);
-// });
-// return selItems;
-// }
-
-window.addEventListener("DOMContentLoaded",(event)=>{
-    const fullName = document.querySelector('#full-name');
-    const textError = document.querySelector(".text-error");   
-    let nameRegex = RegExp("^[A-Z]{1}[a-zA-Z]{2,}[ ][A-Z]{1}[a-zA-Z]{2,}$");      
-    validateEntry(fullName,nameRegex,textError);
-
-    const phoneNumber = document.querySelector('#tel');
-    const phoneError = document.querySelector(".phone-error");
-    let phoneRegex = RegExp("((^\\+?)(([0-9]{2,3})(\\s))?)[1-9]{1}[0-9]{9}$");
-    validateEntry(phoneNumber,phoneRegex,phoneError);
+//  Section 1 : UC6
+let addressBookContactJSONObject = {};
+window.addEventListener('DOMContentLoaded', (event) => {
+    const fullName = document.querySelector("#full-name");
+    fullName.addEventListener('input', function () {
+        if (fullName.value.length == 0) {
+            setTextContent(".full-name-error", "");
+            setTextContent(".valid-full-name", "");
+        }
+        try {
+            (new Contact()).fullName = fullName.value;
+            setTextContent(".full-name-error", "");
+            setTextContent(".valid-full-name", '✓');
+        } catch (error) {
+            setTextContent(".full-name-error", error);
+            setTextContent(".valid-full-name", "");
+        }
+    });
 
     const address = document.querySelector('#address');
-    const addressError = document.querySelector(".address-error");
-    let addressRegex = RegExp("^([A-Za-z0-9/,-]{3,}[ ]?)+$");
-    validateEntry(address,addressRegex,addressError);
+    address.addEventListener('input', function () {
+        if (address.value.length == 0) {
+            setTextContent(".address-error", "");
+            setTextContent(".valid-address", "");
+        }
+        try {
+            (new Contact()).address = address.value;
+            setTextContent(".address-error", "");
+            setTextContent(".valid-address", '✓');
+        } catch (error) {
+            setTextContent(".address-error", error);
+            setTextContent(".valid-address", "");
+        }
+    });
 
-    function validateEntry(entry,regex,errorField){
-        entry.addEventListener('input',function(){
-            if(regex.test(entry.value)||entry.value.length==0)
-                errorField.textContent="";
-            else 
-                errorField.textContent="Invalid entry";
-        });
-    }
+    const phoneNumber = document.querySelector('#tel');
+    phoneNumber.addEventListener('input', function () {
+        if (phoneNumber.value.length == 0) {
+            setTextContent(".tel-error", "");
+            setTextContent(".valid-tel", "");
+        }
+        try {
+            (new Contact()).phoneNumber = phoneNumber.value;
+            setTextContent(".tel-error", "");
+            setTextContent(".valid-tel", '✓');
+        } catch (error) {
+            setTextContent(".tel-error", error);
+            setTextContent(".valid-tel", "");
+        }
+    });
 });
+
+const setAddressBookContactJSONObject = () => {
+    addressBookContactJSONObject._fullName = getValue('#full-name');
+    addressBookContactJSONObject._address = getValue('#address');
+    addressBookContactJSONObject._phoneNumber = getValue('#tel');
+    addressBookContactJSONObject._city = getValue('#city');
+    addressBookContactJSONObject._state = getValue('#state');
+    addressBookContactJSONObject._zip = getValue('#zip');
+    alert("ADDED JSON Object : " + addressBookContactJSONObject._fullName);
+};
+
+const getValue = (propertyId) => {
+    let value = document.querySelector(propertyId).value;
+    return value;
+};
+
+const setTextContent = (propertyId, value) => {
+    const contentElement = document.querySelector(propertyId);
+    contentElement.textContent = value;
+};
