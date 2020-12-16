@@ -1,4 +1,3 @@
-// Section 1: UC8
 let addressBookContactJSONObject = {};
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -18,6 +17,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
     });
+
     const address = document.querySelector('#address');
     address.addEventListener('input', function () {
         if (address.value.length == 0) {
@@ -34,6 +34,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
     });
+
     const phoneNumber = document.querySelector('#tel');
     phoneNumber.addEventListener('input', function () {
         if (phoneNumber.value.length == 0) {
@@ -50,7 +51,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         }
     });
-
 });
 
 const save = (event) => {
@@ -59,6 +59,7 @@ const save = (event) => {
     try {
         setAddressBookContactJSONObject();
         UpdateLocalStorage();
+        resetForm();
         window.location.replace(site_properties.home_page);
     } catch (submitError) {
         alert(submitError);
@@ -119,7 +120,7 @@ const setAddressBookContactClassObject = (contactData) => {
     contactData.city = addressBookContactJSONObject._city;
     contactData.state = addressBookContactJSONObject._state;
     contactData.zip = addressBookContactJSONObject._zip;
-    alert("ADDED CONTACT CLASS Object :\n" + contactData.toString());
+    alert("ADDED CONTACT CLASS Object: \n" + contactData.toString());
 };
 
 const createNewContactId = () => {
@@ -128,6 +129,31 @@ const createNewContactId = () => {
     localStorage.setItem("ContactID", contactId);
     return contactId;
 }
+
+const resetForm = () => {
+    setValue("#full-name", "");
+    setTextContent(".full-name-error", "");
+    setTextContent(".valid-full-name", "");
+    setValue("#tel", "");
+    setTextContent(".tel-error", "");
+    setTextContent(".valid-tel", "");
+    setValue("#address", "");
+    setTextContent(".address-error", "");
+    setTextContent(".valid-address", "");
+    setSelectedIndex("#city", 0);
+    setSelectedIndex("#state", 0);
+    setSelectedIndex("#zip", 0);
+};
+
+const setValue = (propertyId, value) => {
+    const element = document.querySelector(propertyId);
+    element.value = value;
+};
+
+const setSelectedIndex = (propertyId, index) => {
+    const element = document.querySelector(propertyId);
+    element.selectedIndex = index;
+};
 
 const getValue = (propertyId) => {
     let value = document.querySelector(propertyId).value;
