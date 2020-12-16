@@ -28,7 +28,7 @@ class Contact {
         }
         this._address = address;
     }
-     get city() {
+    get city() {
         return this._city;
     }
     set city(city) {
@@ -56,9 +56,9 @@ class Contact {
         } else
             throw "Invalid Phone Number!";
     }
-    //method
+    //methodS
     toString() {
-        return "fullname: " + this.fullName + ", phoneNumber: " + this.phoneNumber + ", address: " + this.address +
+        return "id: " + this.id + "fullname: " + this.fullName + ", phoneNumber: " + this.phoneNumber + ", address: " + this.address +
             ", city: " + this.city + ", state: " + this.state + ", zip: " + this.zip;
     }
 }

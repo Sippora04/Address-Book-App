@@ -211,7 +211,7 @@ valid-message {
 }
 
 .resetButton:hover {
-    background: #0000008e;
+    background: #ff0000bb;
     color: #faf9f9e3;
     font-weight: 300;
     border: 2px solid #e4e4e4;
