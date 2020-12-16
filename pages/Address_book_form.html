@@ -30,6 +30,7 @@
             <div class="row-content">
                 <label for="full-name" class="label text">Full Name</label>
                 <input class="input" type="text" id="full-name" name="full-name" required>
+                <valid-message class="valid-name" for="full-name"></valid-message>
                 <error-output class="full-name-error" for="full-name"></error-output>
             </div>
             <div class="row-content">
@@ -73,7 +74,15 @@
                 <input type="tel" id="tel" name="tel" class="input">
                 <error-output class="tel-error" for="tel"></error-output>
             </div>
+            <div class="buttonParent">
+                <div class="submit-reset">
+                    <button type="submit" class="button submitButton">Add</button>
+                    <button type="reset" class="resetButton button">Reset</button>
+                </div>
+            </div>
         </form>
+    </div>
+    </form>
     </div>
     <script src="../js/person_data_script.js"></script>
     <script src="../js/form_script.js"></script>
