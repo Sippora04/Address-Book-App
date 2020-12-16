@@ -58,7 +58,7 @@ class Contact {
     }
     //methodS
     toString() {
-        return "id: " + this.id + "fullname: " + this.fullName + ", phoneNumber: " + this.phoneNumber + ", address: " + this.address +
+        return "id: " + this.id + " fullname: " + this.fullName + ", phoneNumber: " + this.phoneNumber + ", address: " + this.address +
             ", city: " + this.city + ", state: " + this.state + ", zip: " + this.zip;
     }
 }
