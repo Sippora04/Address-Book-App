@@ -82,7 +82,13 @@ const setAddressBookContactJSONObject = () => {
 const UpdateLocalStorage = () => {
     let addressBookList = JSON.parse(localStorage.getItem("AddressBookList"));
     if (addressBookList) {
-        addressBookList.push(createAddressBookContactData());
+        let contactData = addressBookList.find(contact => contact._id == addressBookContactJSONObject._id);
+        if (!contactData) {
+            addressBookList.push(createAddressBookContactData());
+        } else {
+            const index = addressBookList.map(contact => contact._id).indexOf(contactData._id);
+            addressBookList.splice(index, 1, createAddressBookContactData(contactData._id));
+        }
     } else {
         addressBookList = [createAddressBookContactData()];
     }

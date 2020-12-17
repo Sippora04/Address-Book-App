@@ -13,7 +13,7 @@ const getAddressBookContactListFromStorage = () => {
 
 const createInnerHtml = () => {
     const headerHtml =
-        "<th>FullName</th>" +
+        "<th>Fullname</th>" +
         "<th>Address</th>" +
         "<th>City</th>" +
         "<th>State</th>" +
