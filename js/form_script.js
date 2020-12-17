@@ -1,3 +1,4 @@
+let isUpdate = false;
 let addressBookContactJSONObject = {};
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -14,6 +15,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
             } catch (error) {
                 setTextContent(".full-name-error", error);
                 setTextContent(".valid-full-name", "");
+            }
+        }
+    });
+
+    const phoneNumber = document.querySelector('#tel');
+    phoneNumber.addEventListener('input', function () {
+        if (phoneNumber.value.length == 0) {
+            setTextContent(".tel-error", "");
+            setTextContent(".valid-tel", "");
+        } else {
+            try {
+                (new Contact()).phoneNumber = phoneNumber.value;
+                setTextContent(".tel-error", "");
+                setTextContent(".valid-tel", '✓');
+            } catch (error) {
+                setTextContent(".tel-error", error);
+                setTextContent(".valid-tel", "");
             }
         }
     });
@@ -35,22 +53,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 
-    const phoneNumber = document.querySelector('#tel');
-    phoneNumber.addEventListener('input', function () {
-        if (phoneNumber.value.length == 0) {
-            setTextContent(".tel-error", "");
-            setTextContent(".valid-tel", "");
-        } else {
-            try {
-                (new Contact()).phoneNumber = phoneNumber.value;
-                setTextContent(".tel-error", "");
-                setTextContent(".valid-tel", '✓');
-            } catch (error) {
-                setTextContent(".tel-error", error);
-                setTextContent(".valid-tel", "");
-            }
-        }
-    });
+    checkForUpdate();
 });
 
 const save = (event) => {
@@ -120,7 +123,7 @@ const setAddressBookContactClassObject = (contactData) => {
     contactData.city = addressBookContactJSONObject._city;
     contactData.state = addressBookContactJSONObject._state;
     contactData.zip = addressBookContactJSONObject._zip;
-    alert("ADDED CONTACT CLASS Object: \n" + contactData.toString());
+    alert("ADDED CONTACT CLASS Object :\n" + contactData.toString());
 };
 
 const createNewContactId = () => {
@@ -129,6 +132,15 @@ const createNewContactId = () => {
     localStorage.setItem("ContactID", contactId);
     return contactId;
 }
+
+const setForm = () => {
+    setValue("#full-name", addressBookContactJSONObject._fullName);
+    setValue("#tel", addressBookContactJSONObject._phoneNumber);
+    setValue("#address", addressBookContactJSONObject._address);
+    setValue("#city", addressBookContactJSONObject._city);
+    setValue("#state", addressBookContactJSONObject._state);
+    setValue("#zip", addressBookContactJSONObject._zip);
+};
 
 const resetForm = () => {
     setValue("#full-name", "");
@@ -163,4 +175,12 @@ const getValue = (propertyId) => {
 const setTextContent = (propertyId, value) => {
     const contentElement = document.querySelector(propertyId);
     contentElement.textContent = value;
+};
+
+const checkForUpdate = () => {
+    const personToEditJson = localStorage.getItem("PersonToEdit");
+    isUpdate = personToEditJson ? true : false;
+    if (!isUpdate) return;
+    addressBookContactJSONObject = JSON.parse(personToEditJson);
+    setForm();
 };
