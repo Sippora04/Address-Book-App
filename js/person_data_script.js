@@ -6,6 +6,7 @@ class Contact {
     set id(id) {
         this._id = id;
     }
+
     get fullName() {
         return this._fullName;
     }
@@ -16,6 +17,7 @@ class Contact {
         } else
             throw "Invalid FullName!";
     }
+
     get address() {
         return this._address;
     }
@@ -28,24 +30,28 @@ class Contact {
         }
         this._address = address;
     }
+
     get city() {
         return this._city;
     }
     set city(city) {
         this._city = city;
     }
+
     get state() {
         return this._state;
     }
     set state(state) {
         this._state = state;
     }
+
     get zip() {
         return this._zip;
     }
     set zip(zip) {
         this._zip = zip;
     }
+
     get phoneNumber() {
         return this._phoneNumber;
     }
@@ -56,7 +62,7 @@ class Contact {
         } else
             throw "Invalid Phone Number!";
     }
-    //methodS
+    //method
     toString() {
         return "id: " + this.id + " fullname: " + this.fullName + ", phoneNumber: " + this.phoneNumber + ", address: " + this.address +
             ", city: " + this.city + ", state: " + this.state + ", zip: " + this.zip;
