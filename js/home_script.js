@@ -1,19 +1,25 @@
-//Section 2 : UC3
+let addressBookContactList;
 window.addEventListener("DOMContentLoaded", () => {
+    addressBookContactList = getAddressBookContactListFromStorage();
+    document.querySelector(".person-count").textContent = addressBookContactList.length;
     createInnerHtml();
 });
 
+const getAddressBookContactListFromStorage = () => {
+    return localStorage.getItem("AddressBookList") ?
+        JSON.parse(localStorage.getItem("AddressBookList")) : [];
+};
+
 const createInnerHtml = () => {
     const headerHtml =
-        "<th>FullName</th>" +
+        "<th>Fullname</th>" +
         "<th>Address</th>" +
         "<th>City</th>" +
         "<th>State</th>" +
         "<th>Zip Code</th>" +
         "<th>Phone Number</th>";
-    let addressBookContactLocalList = createAddressBookJSON();
     let innerHtml = `${headerHtml}`;
-    for (let contactData of addressBookContactLocalList) {
+    for (let contactData of addressBookContactList) {
         innerHtml = `${innerHtml}
         <tr>
             <td>${contactData._fullName}</td>
@@ -31,26 +37,3 @@ const createInnerHtml = () => {
     }
     document.querySelector("#display").innerHTML = innerHtml;
 };
-
-const createAddressBookJSON = () => {
-    let addressBookContactLocalList = [{
-        _id: "1",
-        _fullName: "Sippora Toppo",
-        _address: "Abc, JB Road, Dorando, Ranchi, Jhk",
-        _city: "Ranchi",
-        _state: "Jharkhand",
-        _zip: "190891",
-        _phoneNumber: "7009008089",
-    },
-    {
-        _id: "2",
-        _fullName: "Asher Toppo",
-        _address: "402A, LR Road, XYZ, Dumka, Jhk",
-        _city: "Dumka",
-        _state: "Jharkhand",
-        _zip: "190101",
-        _phoneNumber: "9129008009",
-    }
-    ];
-    return addressBookContactLocalList;
-}
